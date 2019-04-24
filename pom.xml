@@ -8,13 +8,13 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.facebook.presto.hive</groupId>
-    <artifactId>hive-apache-jdbc</artifactId>
-    <version>0.13.1-6-SNAPSHOT</version>
+    <groupId>com.qubole.presto.hive</groupId>
+    <artifactId>hive3-apache-jdbc</artifactId>
+    <version>3.0.0-qubole-SNAPSHOT</version>
 
     <name>hive-apache-jdbc</name>
     <description>Shaded version of Apache Hive JDBC driver for Presto</description>
-    <url>https://github.com/facebook/presto-hive-jdbc</url>
+    <url>https://github.com/qubole/presto-hive-jdbc</url>
 
     <inceptionYear>2015</inceptionYear>
 
@@ -30,21 +30,32 @@
         <!-- see original projects for developer information -->
     </developers>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+  </distributionManagement>
+
     <scm>
-        <connection>scm:git:git://github.com/facebook/presto-hive-jdbc.git</connection>
-        <developerConnection>scm:git:git://github.com/facebook/presto-hive-jdbc.git</developerConnection>
-        <url>https://github.com/facebook/presto-hive-jdbc</url>
+        <connection>scm:git:git://github.com/qubole/presto-hive-jdbc.git</connection>
+        <url>http://github.com/qubole/presto-hive-jdbc</url>
+        <developerConnection>scm:git:git@github.com:qubole/presto-hive-jdbc.git</developerConnection>
         <tag>HEAD</tag>
-    </scm>
+  </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetJdk>1.7</project.build.targetJdk>
-        <shadeBase>com.facebook.presto.hive.jdbc.\$internal</shadeBase>
-        <dep.slf4j.version>1.6.6</dep.slf4j.version>
+        <shadeBase>com.qubole.presto.hive.jdbc.\$internal</shadeBase>
+        <dep.slf4j.version>1.7.25</dep.slf4j.version>
         <dep.hadoop.version>0.20.2</dep.hadoop.version>
-        <dep.hive.version>0.13.1</dep.hive.version>
-        <dep.thrift.version>0.9.1</dep.thrift.version>
+        <dep.hive.version>3.1.1</dep.hive.version>
+        <dep.thrift.version>0.9.3</dep.thrift.version>
         <dep.guava.version>11.0.2</dep.guava.version>
     </properties>
 
@@ -108,32 +119,80 @@
             <version>${dep.hive.version}</version>
             <exclusions>
                 <exclusion>
+                    <groupId>org.apache.hive</groupId>
+                    <artifactId>hive-service-rpc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hive</groupId>
+                    <artifactId>hive-upgrade-acid</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>hadoop-hdfs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.github.joshelser</groupId>
+                    <artifactId>dropwizard-metrics-hadoop-metrics2-reporter</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>jline</groupId>
                     <artifactId>jline</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>commons-cli</groupId>
-                    <artifactId>commons-cli</artifactId>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-http</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-rewrite</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-webapp</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javolution</groupId>
+                    <artifactId>javolution</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.sf.jpam</groupId>
+                    <artifactId>jpam</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-1.2-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-slf4j-impl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-web</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
                     <artifactId>commons-compress</artifactId>
                 </exclusion>
                 <exclusion>
-                    <groupId>commons-lang</groupId>
-                    <artifactId>commons-lang</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>commons-cli</groupId>
+                    <artifactId>commons-cli</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -156,10 +215,11 @@
                     <groupId>commons-httpclient</groupId>
                     <artifactId>commons-httpclient</artifactId>
                 </exclusion>
+                <!--SerDe is required in product tests
                 <exclusion>
                     <groupId>org.apache.hive</groupId>
                     <artifactId>hive-serde</artifactId>
-                </exclusion>
+                </exclusion>-->
                 <exclusion>
                     <groupId>jline</groupId>
                     <artifactId>jline</artifactId>
@@ -446,6 +506,10 @@
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
     </dependencies>
@@ -610,6 +674,10 @@
                                     <pattern>org.apache.hive.service</pattern>
                                     <shadedPattern>${shadeBase}.org.apache.hive.service</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.apache.hive.jdbc</pattern>
+                                    <shadedPattern>org.apache.hive3.jdbc</shadedPattern>
+                                </relocation>
                             </relocations>
                             <filters>
                                 <filter>
@@ -641,9 +709,15 @@
                                         <exclude>log4j.properties</exclude>
                                         <exclude>bin.tgz</exclude>
                                         <exclude>webapps/**</exclude>
+                                        <exclude>log4j</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.apache.logging.log4j:log4j-api:*</exclude>
+                                </excludes>
+                            </artifactSet>
                         </configuration>
                     </execution>
                 </executions>
@@ -695,3 +769,4 @@
         </pluginManagement>
     </build>
 </project>
+
