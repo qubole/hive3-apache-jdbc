@@ -10,7 +10,7 @@
 
     <groupId>com.qubole.presto.hive</groupId>
     <artifactId>hive3-apache-jdbc</artifactId>
-    <version>3.0.0-qubole</version>
+    <version>3.0.0-2-qubole-SNAPSHOT</version>
 
     <name>hive-apache-jdbc</name>
     <description>Shaded version of Apache Hive JDBC driver for Presto</description>
@@ -45,7 +45,7 @@
         <connection>scm:git:git://github.com/qubole/presto-hive-jdbc.git</connection>
         <url>http://github.com/qubole/presto-hive-jdbc</url>
         <developerConnection>scm:git:git@github.com:qubole/presto-hive-jdbc.git</developerConnection>
-        <tag>3.0.0-qubole</tag>
+        <tag>HEAD</tag>
   </scm>
 
     <properties>
