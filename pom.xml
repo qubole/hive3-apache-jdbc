@@ -55,7 +55,7 @@
         <dep.slf4j.version>1.7.25</dep.slf4j.version>
         <dep.hadoop.version>0.20.2</dep.hadoop.version>
         <dep.hive.version>3.1.1</dep.hive.version>
-        <dep.thrift.version>0.9.3</dep.thrift.version>
+        <dep.thrift.version>0.14.0</dep.thrift.version>
         <dep.guava.version>11.0.2</dep.guava.version>
     </properties>
 
